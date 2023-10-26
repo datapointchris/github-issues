@@ -1,59 +1,35 @@
-# Project Title
+# Github Issues
 
-## Description
+WHY is it so hard to see all of the issues across all repos for a user on github?  
 
-This project was created with the initial purpose of learning to scrape 'messy' data and clean it through a pipeline of functions automatically.  Some features may not be implemented perfectly, or be missing entirely.  Clean, functional, decoupled code is the main purpose of this project, along with learning how to implement traditional relational databases and NoSQL databases.
+- JIRA is a b*tch to use and setup and it's so sloowwww  
+- Linear is a cool app but doesn't support this functionality that I can find
+- Github web doesn't support consolidating issues across repos
+- Github Desktop seems mostly useless in general...
 
-## Features
+This is a simple python script that uses the github REST API to get all of the issues for a user.
+Gets all of the open issues for all repos (private also if github token provided) for a user.  
+Runs a flask server to serve flask-admin UI to view all of the issues.  
+Temp storage in a sqlite db in memory while serving.
 
-- Scrapes all of the listings for search term
-- Cleans data for analysis
-- Stores data in database
-- Event logging
-- NLP of descriptions and amenities
-- Machine learning and visualization of price influencers.
-
-## Future Features
-
-- Load different formats into database
-- MongoDB integration for articles
-- Visualize Data
-- Machine Learning algorithms to find key price predictors.
-- Options Run on Command Line
-- Web Interface with more options
-
-## File Descriptions
-
-`trulia_scrape.py` - this file can be run from the command line and will automatically scrape apartment data for the Austin area and save it to a CSV file in the `daily_scrape_files` folder.
+All this in ~100 lines of code 😎
 
 ## How To Use
 
-```bash
-# Clone this repository
-$ git clone https://github.com/datapointchris/etl_housing
+1. Create `.env` file in the main dir
+2. Add `GITHUB_TOKEN` to the `.env` file
+3. Change the `GITHUB_USER` in `main.py` to the user you want to get the issues for.
+4. Run `python main.py` (Install first in virtual env with poetry or pip)
+5. Navigate browser to `http://127.0.0.1:5123/admin/issue/`
 
-# Go into the repository
-$ cd etl_housing
+## Tech Stuff
 
-# Run the app
-$ python scraper.py
-```
-
-Program will begin scraping Trulia for rentals.  Currently only Austin rentals have been tested.  Other cities and search terms will be available in future versions.
-
-Jupyter Notebooks are also included in the repo where you can run the program and change the `page_url` to scrape different cities.
-
-## Requirements
-
-You really should only need to install BeautifulSoup if you don't have it.  Everything else should be part of the standard library.
-
-- Numpy
-- Pandas
-- Requests
-- BeautifulSoup
-- SQLite3
-
-## Credits
+- Github REST API
+- Flask
+- Flask-Admin
+- peewee
+- async calls to github api
+- in memory sqlite db for temp storage while serving
 
 ## License
 

@@ -11,7 +11,7 @@ from flask_admin.contrib.peewee import ModelView
 
 load_dotenv()
 
-USERNAME = 'datapointchris'
+GITHUB_USER = 'datapointchris'
 TOKEN = os.environ['GITHUB_TOKEN']
 HEADERS = {'Authorization': f'Bearer {TOKEN}', 'X-GitHub-Api-Version': '2022-11-28'}
 APP_DEBUG = True
@@ -92,7 +92,7 @@ ad.add_view(IssueAdmin(Issue))
 
 def main():
     Issue.create_table()
-    issues = asyncio.run(get_all_issues_for_user(USERNAME, HEADERS))
+    issues = asyncio.run(get_all_issues_for_user(GITHUB_USER, HEADERS))
     Issue.insert_many(issues).execute()
 
     app.run(debug=APP_DEBUG, port=APP_PORT)
