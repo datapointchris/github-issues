@@ -5,8 +5,17 @@ description = ""
 authors = ["Chris Birch <datapointchris@gmail.com>"]
 readme = "README.md"
 
+[tool.poetry.scripts]
+issues = "github_issues.main:main"
+
 [tool.poetry.dependencies]
 python = "^3.11"
+flask-admin = "^1.6.1"
+peewee = "^3.17.0"
+httpx = "^0.25.0"
+python-dotenv = "^1.0.0"
+flask = "^3.0.0"
+wtf-peewee = "^3.0.5"
 
 
 [tool.poetry.group.dev.dependencies]
