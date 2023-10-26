@@ -32,7 +32,6 @@ class Issue(peewee.Model):
     url = peewee.CharField()
 
     class Meta:
-        table_name = 'issue'
         database = db
 
 
@@ -58,11 +57,10 @@ async def get_issues_for_repo(repo, headers=None):
         if repo_issues := await client.get(repo['url'] + '/issues'):
             for issue in repo_issues.json():
                 issue_fields = ['title', 'number', 'created_at', 'url']
-                milestone = issue['milestone']
                 d = {field: issue[field] for field in issue_fields}
                 d['labels'] = [label['name'] for label in issue['labels']]
                 d['assignees'] = [assignee['login'] for assignee in issue['assignees']] if issue['assignees'] else None
-                d['milestone'] = milestone['title'] if milestone else None
+                d['milestone'] = issue['milestone']['title'] if issue['milestone'] else None
                 d['body'] = issue['body'].split('\n')[0]
                 d['repo'] = repo['name']
                 issues.append(d)
